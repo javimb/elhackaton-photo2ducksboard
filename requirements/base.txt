@@ -1,0 +1,10 @@
+Django
+psycopg2
+
+django-configurations==0.6
+dj-database-url
+
+South==0.8.2
+
+requests==2.2.1
+django-bootstrap3==3.2.0

@@ -1,0 +1,44 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+
+    <header class="container text-center page-header">
+        {% load staticfiles %}
+        <img src="{% static 'img/logo_elhackaton.png' %}">
+        <h1>Photo2Ducksboard</h1>
+        <a href="https://public.ducksboard.com/B5SMZkXZp7tKfEOviKvL/">Visit El Hackatón's Ducksboard</a>
+    </header>
+
+    <section class="container">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% load bootstrap3 %}
+            {% bootstrap_form form %}
+            <button class="btn btn-default" type="submit">Upload</button>
+        </form>
+    </section>
+
+    <section class="container">
+        <div class="row">
+            {% for photo in photos %}
+                <div class="col-md-6">
+                    <a class="thumbnail" href="{{ photo.image.url }}">
+                        <img class="lazy img-responsive " data-original="{{ photo.image.url }}" width=500 height=500>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+{% endblock content %}
+
+{% block js %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $(function() {
+            $("img.lazy").lazyload({
+                effect : "fadeIn"
+            });
+        });
+    </script>
+{% endblock js %}
